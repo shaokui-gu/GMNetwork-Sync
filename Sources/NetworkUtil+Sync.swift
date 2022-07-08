@@ -91,8 +91,8 @@ public extension GMNetworkUtil {
     ///   - path: url 路径
     ///   - delegate: 代理
     @discardableResult
-    func SYNC_GET(_ url:String, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
-        return try self.syncRequest(request:GMNetworkRequest(url, method: .get, serializer:serializer))
+    func SYNC_GET(_ url:String, headers:Dictionary<String,String>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
+        return try self.syncRequest(request:GMNetworkRequest(url, method: .get, headers: headers, serializer:serializer))
     }
 
     /// 同步 POST 请求
@@ -101,8 +101,8 @@ public extension GMNetworkUtil {
     ///   - parameters: 参数
     ///   - delegate: 代理
     @discardableResult
-    func SYNC_POST(_ url:String, parameters:Dictionary<String, Encodable>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
-        return try self.syncRequest(request:GMNetworkRequest(url, method: .post, parameters: parameters == nil ? nil : Parameters.init(dict: parameters!), serializer:serializer))
+    func SYNC_POST(_ url:String, parameters:Dictionary<String, Encodable>? = nil, headers:Dictionary<String,String>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
+        return try self.syncRequest(request:GMNetworkRequest(url, method: .post, parameters: parameters == nil ? nil : Parameters.init(dict: parameters!), headers: headers, serializer:serializer))
     }
 
     
@@ -112,8 +112,8 @@ public extension GMNetworkUtil {
     ///   - parameters: 参数
     ///   - delegate: 代理
     @discardableResult
-    func SYNC_PUT(_ url:String, parameters:Dictionary<String, Encodable>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) -> GMNetworkTask {
-        return self.request(request:GMNetworkRequest(url, method: .put, parameters: parameters == nil ? nil : Parameters.init(dict: parameters!), serializer:serializer))
+    func SYNC_PUT(_ url:String, parameters:Dictionary<String, Encodable>? = nil, headers:Dictionary<String,String>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) -> GMNetworkTask {
+        return self.request(request:GMNetworkRequest(url, method: .put, parameters: parameters == nil ? nil : Parameters.init(dict: parameters!), headers: headers, serializer:serializer))
     }
 
     /// 同步 DELETE 请求
@@ -121,8 +121,8 @@ public extension GMNetworkUtil {
     ///   - path: url 路径
     ///   - delegate: 代理
     @discardableResult
-    func SYNC_DELETE(_ url:String, parameters:Dictionary<String, Encodable>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
-        return try self.syncRequest(request:GMNetworkRequest(url, method: .delete, parameters:parameters == nil ? nil : Parameters.init(dict: parameters!), serializer:serializer))
+    func SYNC_DELETE(_ url:String, parameters:Dictionary<String, Encodable>? = nil, headers:Dictionary<String,String>? = nil, _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
+        return try self.syncRequest(request:GMNetworkRequest(url, method: .delete, parameters:parameters == nil ? nil : Parameters.init(dict: parameters!), headers: headers, serializer:serializer))
     }
 
     /// 同步 UPLOAD 请求
@@ -130,8 +130,8 @@ public extension GMNetworkUtil {
     ///   - path: url 路径
     ///   - delegate: 代理
     @discardableResult
-    func ASYNC_UPLOAD(_ url:String, dataArray:[GMNetworkFormData], parameters:Dictionary<String, Encodable>? = nil, method:HTTPMethod = .upload,  _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
-        return try self.syncRequest(request: GMNetworkRequest(url, method: method, parameters:parameters == nil ? nil : Parameters.init(dict: parameters!) ,dataArray: dataArray, serializer: serializer))
+    func ASYNC_UPLOAD(_ url:String, dataArray:[GMNetworkFormData], parameters:Dictionary<String, Encodable>? = nil, headers:Dictionary<String,String>? = nil, method:HTTPMethod = .upload,  _ serializer:GMNetworkResponseSerializer? = nil) throws -> Any? {
+        return try self.syncRequest(request: GMNetworkRequest(url, method: method, parameters:parameters == nil ? nil : Parameters.init(dict: parameters!) ,dataArray: dataArray, headers: headers, serializer: serializer))
     }
 
 }

@@ -1,5 +1,4 @@
 import XCTest
-@testable import GMNetwork_Sync
 
 final class GM_ToastTests: XCTestCase {
     func testExample() throws {
